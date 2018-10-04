@@ -3,8 +3,6 @@ language: python
 python:
   - pypy3
 
-runtime:
-  nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
   
 build:
   pre_ci:
