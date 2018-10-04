@@ -10,12 +10,14 @@ build:
   pre_ci:
     - echo "pre-ci section"
     - docker build -t=742038439709.dkr.ecr.us-west-2.amazonaws.com/sample_node .
+    - docker build -t=shippabledocker/sample_node_pvt:latest.40 .
 
   pre_ci_boot:
     image_name: drydock/u16all
     image_tag: master
+    env: envInPreCiBoot=bar
     pull: true
-    options:
+    options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
     
   ci:
     - python -V
@@ -23,12 +25,15 @@ build:
     
   post_ci:
     - echo "post-ci section"
+    - docker push shippabledocker/sample_node_pvt:latest.40
     
   on_success:
     - echo "on-success section
+    - ls
     
   on_failure:
     - echo "on-failure section"
+    - ls
     
   cache: true
   #cache_dir_list:
@@ -41,12 +46,13 @@ integrations:
   hub:
  #Docker integration
     - integrationName: ship-docker
-      type: docker 
-  #GCR integration
-   # - integrationName: ship-gcr
-   #   type: gcr
+      type: dockerRegistryLogin
+      branches:
+        only:
+          - "build-all-sections"
+      
  # #ECR integration
-    - integrationName: ship-ecr
+    - integrationName: awskeys
       type: ecr
       region: us-west-2
     #  branches: #Testing the wildcards for branches exclude
