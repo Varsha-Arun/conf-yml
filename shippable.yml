@@ -4,8 +4,51 @@ python:
   - pypy3
 
 runtime:
-  nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge #u14
+  nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
   
 build:
-  ci: 
+  pre_ci:
+    - echo "pre-ci section"
+    - docker build -t=742038439709.dkr.ecr.us-west-2.amazonaws.com/sample_node .
+
+  pre_ci_boot:
+    image_name: drydock/u16all
+    image_tag: master
+    pull: true
+    options:
+    
+  ci:
     - python -V
+    - echo "ci section"
+    
+  post_ci:
+    - echo "post-ci section"
+    
+  on_success:
+    - echo "on-success section
+    
+  on_failure:
+    - echo "on-failure section"
+    
+  cache: true
+  #cache_dir_list:
+   # - #dir1
+   
+  push:
+    - docker push 742038439709.dkr.ecr.us-west-2.amazonaws.com/sample_node
+    
+integrations:
+  hub:
+ #Docker integration
+    - integrationName: ship-docker
+      type: docker 
+  #GCR integration
+   # - integrationName: ship-gcr
+   #   type: gcr
+ # #ECR integration
+    - integrationName: ship-ecr
+      type: ecr
+      region: us-west-2
+    #  branches: #Testing the wildcards for branches exclude
+      #  except:
+#   - n*
