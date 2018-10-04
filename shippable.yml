@@ -22,19 +22,19 @@ env:
 addons: 
   firefox: "25.0" 
   
-#matrix:
+matrix:
 #include this version with the env 
- # include:               
- #   - python: pypy
- #     env: foo=fubuPYPY    
+  include:               
+    - python: pypy
+      env: foo=fubuPYPY    
 #excludes this version 
-#  exclude:             
-#    - python: 3.7
- #     env:
-  #      - env1=test37 
+  exclude:             
+    - python: 3.7
+      env:
+        - env1=test37 
 #allows failure for this version
- # allow_failures:
-  #  - python: pypy3
+  allow_failures:
+    - python: pypy3
 
 build:
   pre_ci:
@@ -42,7 +42,7 @@ build:
     - docker build -t=$IMAGE_NAME:$IMAGE_TAG .
 
   pre_ci_boot:
-    image_name: drydock/u16all
+    image_name: drydock/u16pytall
     image_tag: master
     env: envInPreCiBoot=bar
     pull: $IMAGE_PULL
