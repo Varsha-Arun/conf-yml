@@ -44,8 +44,8 @@ integrations:
   hub:
   
    # #ECR integration
-    - integrationName: awsinvalidkeys
-      type: ecr
+    - integrationName: aws-new
+      type: amazonKeys
       region: us-west-2
     #  branches: #Testing the wildcards for branches exclude
       #  except:
