@@ -47,12 +47,12 @@ integrations:
  #Docker integration
     - integrationName: ship-docker
       type: dockerRegistryLogin
-      branches:
-        only:
-          - "build-all-sections"
+     # branches:
+      #  only:
+       #   - "build-all-sections"
       
  # #ECR integration
-    - integrationName: awskeys
+    - integrationName: aws-new
       type: ecr
       region: us-west-2
     #  branches: #Testing the wildcards for branches exclude
