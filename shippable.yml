@@ -12,7 +12,7 @@ build:
   pre_ci_boot:
     image_name: drydock/u16all
     image_tag: master
-    env: envInPreCiBoot=bar
+   # env: envInPreCiBoot=bar
     pull: true
     options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
     
