@@ -1,8 +1,7 @@
 language: python
 
 python:
-  - pypy3
-
+  - pypy 
   
 build:
   pre_ci:
