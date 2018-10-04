@@ -7,7 +7,6 @@ python:
 build:
   pre_ci:
     - echo "pre-ci section"
-    - docker build -t=742038439709.dkr.ecr.us-west-2.amazonaws.com/sample_node .
     - docker build -t=shippabledocker/sample_node_pvt:latest.40 .
 
   pre_ci_boot:
@@ -38,15 +37,16 @@ build:
    # - #dir1
    
   push:
-    - docker push 742038439709.dkr.ecr.us-west-2.amazonaws.com/sample_node
+    - echo "push section"
+    #- docker push 742038439709.dkr.ecr.us-west-2.amazonaws.com/sample_node
     
 integrations:
   hub:
   
    # #ECR integration
-    - integrationName: awsinvalidkeys
-      type: ecr
-      region: us-west-2
+   # - integrationName: awsinvalidkeys
+    #  type: ecr
+    #  region: us-west-2
     #  branches: #Testing the wildcards for branches exclude
       #  except:
 #   - n*
