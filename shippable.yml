@@ -25,7 +25,9 @@ matrix:
 #include this version with the env 
   include:               
     - python: pypy
-      env: foo=fubuPYPY    
+      env: 
+        - M1=ONE #just to pass build Since this is in include section it wont take matrix environment variable and value so adding same env n value here. since in all section we are verifing env n value
+        - env1=OneValueFromInclude
 #excludes this version 
   exclude:             
     - python: 3.7
