@@ -78,7 +78,7 @@ build:
     
   cache: true
   #cache_dir_list:
-   # - #dir1
+   # - #dir
    
   push:
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
