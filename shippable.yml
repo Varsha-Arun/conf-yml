@@ -52,7 +52,7 @@ build:
     - python -V
     - echo "ci section"
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi  
+    #- if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi  
     - if [ "$SHIPPABLE_PYTHON_VERSION" == "pypy3" ]; then foobar; fi
     
   post_ci:
@@ -62,12 +62,12 @@ build:
   on_success:
     - echo "on-success section"
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+    #- if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
     
   on_failure:
     - echo "on-failure section"
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+    #- if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
     
   cache: true
   #cache_dir_list:
@@ -75,7 +75,7 @@ build:
    
   push:
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+   # - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
     #- docker push 742038439709.dkr.ecr.us-west-2.amazonaws.com/sample_node
     
 integrations:
