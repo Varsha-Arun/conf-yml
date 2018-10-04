@@ -16,8 +16,8 @@ env:
     - IMAGE_TAG=latest.40
     - IMAGE_PULL=true     
   
-  matrix:
-    - M1=ONE
+#  matrix:
+#    - M1=ONE
 
 addons: 
   firefox: "25.0" 
