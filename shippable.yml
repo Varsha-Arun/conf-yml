@@ -36,13 +36,6 @@ matrix:
   allow_failures:
     - python: pypy3
 
-#Testing for include and exclude branches
-branches:
-  only:
-    - yml-conf
-  except:    
-    - master
-
 build:
   pre_ci:
     - echo "pre-ci section"
