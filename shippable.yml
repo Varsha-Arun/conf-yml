@@ -60,7 +60,7 @@ build:
     - docker push $IMAGE_NAME:$IMAGE_TAG
     
   on_success:
-    - echo "on-success section
+    - echo "on-success section"
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
     - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
     
