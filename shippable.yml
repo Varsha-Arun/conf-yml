@@ -3,7 +3,6 @@ language: python
 python:
   - 2.7 #.14
   - 3.7 #.0 
-  #- pypy #6.0.0 
   - pypy3 #6.0.0
 
 env:
@@ -16,8 +15,8 @@ env:
     - IMAGE_TAG=latest.40
     - IMAGE_PULL=true     
   
-#  matrix:
-#    - M1=ONE
+  matrix:
+    - M1=ONE
 
 addons: 
   firefox: "25.0" 
@@ -40,7 +39,10 @@ build:
   pre_ci:
     - echo "pre-ci section"
     - docker build -t=$IMAGE_NAME:$IMAGE_TAG .
-
+    - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+    
   pre_ci_boot:
     image_name: drydock/u16pytall
     image_tag: master
@@ -52,22 +54,28 @@ build:
     - python -V
     - echo "ci section"
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-    #- if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi  
-    - if [ "$SHIPPABLE_PYTHON_VERSION" == "pypy3" ]; then foobar; fi
+    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi  
+    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+    - if [ "$SHIPPABLE_PYTHON_VERSION" == "pypy3" ]; then testfail; fi
     
   post_ci:
     - echo "post-ci section"
     - docker push $IMAGE_NAME:$IMAGE_TAG
+    - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
   on_success:
     - echo "on-success section"
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-    #- if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi \
+    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
   on_failure:
     - echo "on-failure section"
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-    #- if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
   cache: true
   #cache_dir_list:
@@ -75,23 +83,12 @@ build:
    
   push:
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-   # - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
-    #- docker push 742038439709.dkr.ecr.us-west-2.amazonaws.com/sample_node
-    
+    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+        
 integrations:
   hub:
-  
-   # #ECR integration
-   # - integrationName: awsinvalidkeys
-    #  type: ecr
-    #  region: us-west-2
-    #  branches: #Testing the wildcards for branches exclude
-      #  except:
-#   - n*
 
  #Docker integration
     - integrationName: ship-docker
       type: dockerRegistryLogin
-     # branches:
-      #  only:
-       #   - "build-all-sections"
