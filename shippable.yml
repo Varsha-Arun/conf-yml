@@ -34,8 +34,8 @@ matrix:
       env:
         - env1=test37 
 #allows failure for this version
-  allow_failures:
-    - python: pypy3
+  #allow_failures:
+  #  - python: pypy3
 
 build:
   pre_ci:
@@ -96,8 +96,6 @@ integrations:
       branches: #Testing the wildcards for branches exclude
         except:
           - master
-        only:
-          - not*
       
   notifications:
       
@@ -114,7 +112,7 @@ integrations:
       on_pull_request: always
       branches:
         only:
-          - notificationsAndIntegrations
+          - f*
        
     - integrationName: email         
       type: email        
@@ -132,7 +130,7 @@ integrations:
       on_pull_request: always
       branches:
         only:
-          - notificationsAndIntegrations
+          - f*
       
     - integrationName: irc
       type: irc
@@ -146,21 +144,7 @@ integrations:
       on_pull_request: always
       branches:
         only:
-          - notificationsAndIntegrations
-     
-    - integrationName: irc  
-      type: irc
-      recipients:
-        - "webchat.irchighway.net#rcapp"
-        - "webchat.irchighway.net#testrc"
-      on_start: always
-      on_success: always      
-      on_failure: always 
-      on_cancel: always
-      on_pull_request: always
-      branches:
-        only:
-          - notificationsAndIntegrations
+          - f*
     
     - integrationName: notify-hipchat
       type: hipchatKey
@@ -175,4 +159,4 @@ integrations:
       on_pull_request: always
       branches:
         only:
-          - notificationsAndIntegrations
+          - f*
