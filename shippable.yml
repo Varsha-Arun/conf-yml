@@ -1,5 +1,181 @@
-language: none
+language: python
+
+python:
+  - 2.7 #.14
+  - 3.7 #.0 
+  - pypy3 #6.0.0
+
+git:
+  submodules: true
+
+env:
+  global:
+  #Testing for user defined envs and secure envs
+    - TEST1=EnvFoo
+    - secure: WW/f74KB+/rBPWMpL+hs9PYmO98Hd2PbeGkVMDDaOaDVOYkePjy4xM+NF/06EVsh6wwz1ToihClh1xltrcmfz/JNiSA2pciDksDElSPLzeq5qg4NYeNuLnmziR68AtTadrrZuPOKsT69GcoAvFYX1ZvtYQ4YGBOtbr9a+5lD1jFguv9HcUiDeB3uJLvYVqMsa1tccecvePNfbvVQNAPVB3TMEtU8cJtQyPkK1x448E5aYV9IpY1kc1PmDyDBzlVPxlAIDeND5rXzJafZpnTbPyVU9EnfaY1eXU3/FW6cVCvBzhIXdUF9IChGdG+aiXK3p+BnDlh3Og+6HUUZFZvF4A== 
+      #secure env key and value ----> TEST2=EnvSecure
+    - IMAGE_NAME=shippabledocker/sample_node_pvt
+    - IMAGE_TAG=latest.40
+    - IMAGE_PULL=true     
+  
+  matrix:
+    - M1=ONE
+
+addons: 
+  firefox: "25.0" 
+  
+matrix:
+#include this version with the env 
+  include:               
+    - python: pypy
+      env: 
+        - M1=ONE #just to pass build Since this is in include section it wont take matrix environment variable and value so adding same env n value here. since in all section we are verifing env n value
+        - env1=OneValueFromInclude
+#excludes this version 
+  exclude:             
+    - python: 3.7
+      env:
+        - env1=test37 
+#allows failure for this version
+  allow_failures:
+    - python: pypy3
 
 build:
-  ci: 
-    - echo "Hello"
+  pre_ci:
+    - echo "pre-ci section"
+    - docker build -t=$IMAGE_NAME:$IMAGE_TAG .
+    - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+    
+  pre_ci_boot:
+    image_name: drydock/u16pytall
+    image_tag: master
+    env: envInPreCiBoot=bar
+    pull: $IMAGE_PULL
+    options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
+    
+  ci:
+    - python -V
+    - echo "ci section"
+    - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi  
+    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+    - if [ "$SHIPPABLE_PYTHON_VERSION" == "pypy3" ]; then testfail; fi
+    
+  post_ci:
+    - echo "post-ci section"
+    - docker push $IMAGE_NAME:$IMAGE_TAG
+    - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+    
+  on_success:
+    - echo "on-success section"
+    - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi \
+    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+    
+  on_failure:
+    - echo "on-failure section"
+    - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+    
+  cache: true
+  cache_dir_list:
+    - $SHIPPABLE_BUILD_DIR/shippable.yml
+   
+  push:
+    - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+        
+integrations:
+  hub:
+
+    - integrationName: ship-docker
+      type: dockerRegistryLogin
+      branches: #Testing the wildcards for branches exclude
+        except:
+          - master
+        only:
+          - p*
+      
+  notifications:
+      
+    - integrationName: notify-slack 
+      type: slackKey
+      recipients:
+        - "#random" 
+        - "#rc-public" 
+        - "#rc-private"
+      on_start: always
+      on_success: always
+      on_failure: always 
+      on_cancel: always
+      on_pull_request: always
+      branches:
+        only:
+          - p*
+       
+    - integrationName: email         
+      type: email        
+      recipients: 
+        - varsha@shippable.com
+       # - shiptest.rc.ow@gmail.com
+       # - shiptest.rc.me@gmail.com
+      sendConsoleLogs: true
+      sendCoverageReports: true
+      sendFailingSnippet: true
+      on_start: always
+      on_success: always 
+      on_failure: always 
+      on_cancel: always
+      on_pull_request: always
+      branches:
+        only:
+          - p*
+      
+    - integrationName: irc
+      type: irc
+      recipients:
+        - "chat.freenode.net#testrc"
+        - "chat.freenode.net#rcapp"
+      on_start: always
+      on_success: always      
+      on_failure: always  
+      on_cancel: always
+      on_pull_request: always
+      branches:
+        only:
+          - p*
+     
+    - integrationName: irc  
+      type: irc
+      recipients:
+        - "webchat.irchighway.net#rcapp"
+        - "webchat.irchighway.net#testrc"
+      on_start: always
+      on_success: always      
+      on_failure: always 
+      on_cancel: always
+      on_pull_request: always
+      branches:
+        only:
+          - p*
+    
+    - integrationName: notify-hipchat
+      type: hipchatKey
+      recipients:
+        - '#rc-private'
+        - '#rc-public'
+        - '@shiptestrcow'
+      on_start: always
+      on_success: always   
+      on_failure: always
+      on_cancel: always
+      on_pull_request: always
+      branches:
+        only:
+          - p*
