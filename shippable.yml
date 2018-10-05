@@ -100,7 +100,7 @@ integrations:
         except:
           - master
         only:
-          - not*
+          - p*
       
   notifications:
       
@@ -117,7 +117,7 @@ integrations:
       on_pull_request: always
       branches:
         only:
-          - notificationsAndIntegrations
+          - p*
        
     - integrationName: email         
       type: email        
@@ -135,7 +135,7 @@ integrations:
       on_pull_request: always
       branches:
         only:
-          - notificationsAndIntegrations
+          - p*
       
     - integrationName: irc
       type: irc
@@ -149,7 +149,7 @@ integrations:
       on_pull_request: always
       branches:
         only:
-          - notificationsAndIntegrations
+          - p*
      
     - integrationName: irc  
       type: irc
@@ -163,7 +163,7 @@ integrations:
       on_pull_request: always
       branches:
         only:
-          - notificationsAndIntegrations
+          - p*
     
     - integrationName: notify-hipchat
       type: hipchatKey
@@ -178,4 +178,4 @@ integrations:
       on_pull_request: always
       branches:
         only:
-          - notificationsAndIntegrations
+          - p*
