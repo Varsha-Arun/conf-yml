@@ -42,7 +42,7 @@ build:
     - echo "pre-ci section"
     - docker build -t=$IMAGE_NAME:$IMAGE_TAG .
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-    #- if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
   pre_ci_boot:
@@ -56,7 +56,7 @@ build:
     - python -V
     - echo "ci section"
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-  #  - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi  
+    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi  
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     - if [ "$SHIPPABLE_PYTHON_VERSION" == "pypy3" ]; then testfail; fi
     
@@ -64,19 +64,19 @@ build:
     - echo "post-ci section"
     - docker push $IMAGE_NAME:$IMAGE_TAG
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-   # - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
   on_success:
     - echo "on-success section"
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-   # - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi \
+    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi \
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
   on_failure:
     - echo "on-failure section"
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-   # - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
   cache: true
@@ -85,7 +85,7 @@ build:
    
   push:
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-   # - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
         
 integrations:
@@ -97,12 +97,12 @@ integrations:
         except:
           - master
         only:
-          - notificationsAndIntegrations
+          - not*
       
   notifications:
       
     - integrationName: notify-slack 
-      type: slack
+      type: slackKey
       recipients:
         - "#random" 
         - "#rc-public" 
@@ -134,25 +134,25 @@ integrations:
         only:
           - notificationsAndIntegrations
       
-    #- integrationName: irc
-    #  type: irc
-    #  recipients:
-    #    - "chat.freenode.net#test-rc"
-     #   - "chat.freenode.net#test-alpha"
-    #  on_start: always
-    #  on_success: always      
-     # on_failure: always  
-     # on_cancel: always
-      #on_pull_request: always
-     # branches:
-     #   only:
-     #     - notificationsAndIntegrations
+    - integrationName: irc
+      type: irc
+      recipients:
+        - "chat.freenode.net#testrc"
+        - "chat.freenode.net#rcapp"
+      on_start: always
+      on_success: always      
+      on_failure: always  
+      on_cancel: always
+      on_pull_request: always
+      branches:
+        only:
+          - notificationsAndIntegrations
      
     - integrationName: irc  
       type: irc
       recipients:
         - "webchat.irchighway.net#rcapp"
-        - "webchat.irchighway.net#test-rc"
+        - "webchat.irchighway.net#testrc"
       on_start: always
       on_success: always      
       on_failure: always 
