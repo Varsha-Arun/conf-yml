@@ -59,6 +59,12 @@ build:
     - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi  
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     - if [ "$SHIPPABLE_PYTHON_VERSION" == "pypy3" ]; then testfail; fi
+    - pip install -r requirements.txt
+    - mkdir -p shippable/testresults
+    - mkdir -p shippable/codecoverage
+    - which python
+    - coverage run `which nosetests` test.py --with-xunit --xunit-file=shippable/testresults/nosetests.xml
+    - coverage xml -o shippable/codecoverage/coverage.xml
     
   post_ci:
     - echo "post-ci section"
