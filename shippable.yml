@@ -91,8 +91,67 @@ build:
 integrations:
   hub:
 
- #Docker integration
     - integrationName: ship-docker
       type: dockerRegistryLogin
+      branches: #Testing the wildcards for branches exclude
+        except:
+          - master
+        only:
+          - notificationsAndIntegrations
       
-      #add branch include and exclude report coverage check and update all conf
+  notifications:
+      
+    - integrationName: notify-slack 
+      type: slack
+      recipients:
+        - "#random" 
+        - "#rc-public" 
+        - "#rc-private"
+      on_start: always
+      on_success: always
+      on_failure: always 
+      on_cancel: always
+       
+    - integrationName: email         
+      type: email        
+      recipients: 
+        - varsha@shippable.com
+       # - shiptest.rc.ow@gmail.com
+       # - shiptest.rc.me@gmail.com
+      sendConsoleLogs: true
+      sendCoverageReports: true
+      on_start: always
+      on_success: always 
+      on_failure: always 
+      on_cancel: always
+      
+    #- integrationName: irc
+    #  type: irc
+    #  recipients:
+    #    - "chat.freenode.net#test-rc"
+     #   - "chat.freenode.net#test-alpha"
+    #  on_start: always
+    #  on_success: always      
+     # on_failure: always  
+     # on_cancel: always
+     
+    - integrationName: irc  
+      type: irc
+      recipients:
+        - "webchat.irchighway.net#rcapp"
+        - "webchat.irchighway.net#test-rc"
+      on_start: always
+      on_success: always      
+      on_failure: always 
+      on_cancel: always
+    
+    - integrationName: notify-hipchat
+      type: hipchat
+      recipients:
+        - '#rc-private'
+        - '#rc-public'
+        - '@shiptestrcow'
+      on_start: always
+      on_success: always   
+      on_failure: always
+      on_cancel: always
