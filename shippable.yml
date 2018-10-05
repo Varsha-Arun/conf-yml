@@ -100,3 +100,5 @@ integrations:
  #Docker integration
     - integrationName: ship-docker
       type: dockerRegistryLogin
+      
+      #add branch include and exclude report coverage check and update all conf
