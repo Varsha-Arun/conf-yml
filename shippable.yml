@@ -5,9 +5,9 @@ python:
   - 3.7 #.0 
   - pypy3 #6.0.0
 
-git:
-  submodules: true
-
+#git:
+#  submodules: true
+#
 env:
   global:
   #Testing for user defined envs and secure envs
