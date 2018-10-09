@@ -1,9 +1,11 @@
 language: none
 
 runtime:
-  nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
+  - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
+  - nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
+  - nodePool: dynamic__x86_64__CentOS_7__c4_large
   
 build:
   ci: 
     - echo "Hello!"
-    - sleep 20m
+    - sleep 180m
