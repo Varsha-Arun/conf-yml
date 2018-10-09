@@ -9,7 +9,7 @@ build:
   ci:
     - python --version
  
-    - wget big.txt     
+    #- wget big.txt     
     #- wget https://norvig.com/big.txt
     - cat big.txt >> bigger_file.txt
     #- cat big.txt >> bigger_file.txt
