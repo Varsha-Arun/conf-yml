@@ -3,6 +3,9 @@ language: python
 python:
   - 2.7
 
+runtime:
+  nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
+  
 services:
   - couchdb 
   - elasticsearch 
