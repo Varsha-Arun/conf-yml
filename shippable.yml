@@ -3,8 +3,8 @@ language: python
 python:
   - pypy3
 
-runtime:
-  nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge #u14
+#runtime:
+ # nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge #u14
   
 build:
   ci: 
