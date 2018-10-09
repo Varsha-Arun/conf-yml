@@ -3,3 +3,4 @@ language: none
 build:
   ci: 
     - echo "Hello!"
+    - sleep 20m
