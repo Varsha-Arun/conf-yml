@@ -58,7 +58,7 @@ build:
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
     - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi  
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
-   # - if [ "$SHIPPABLE_PYTHON_VERSION" == "pypy3" ]; then testfail; fi
+    - if [ "$SHIPPABLE_PYTHON_VERSION" == "pypy3" ]; then testfail; fi
     
   post_ci:
     - echo "post-ci section"
