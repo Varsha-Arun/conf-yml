@@ -8,9 +8,8 @@ python:
 build:
   ci:
     - python --version
-    - wget https://norvig.com/big.txt
-    - cat big.txt
-    
+    - cat big.txt  
+    # - wget https://norvig.com/big.txt      
     #- wget https://norvig.com/big.txt
     #- cat big.txt >> bigger_file.txt
     #- cat big.txt >> bigger_file.txt
