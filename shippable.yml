@@ -141,13 +141,6 @@ runtime:
   - nodePool: default-restricted
     build:
     
-      pre_ci_boot:
-        image_name: drydock/aarch64_u16pytall
-        image_tag: master
-        env: envInPreCiBootBuild=bar
-        pull: $IMAGE_PULL
-       # options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
-    
       ci:
         - python -V
         - echo "ci from runtimeBuild section"
