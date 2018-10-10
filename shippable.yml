@@ -37,8 +37,8 @@ matrix:
 #excludes this version 
   exclude:             
     - python: 3.7
-     # env:
-      #  - env1=test37 
+      env:
+        - env1=valuefromexcludesection
 #allows failure for this version
   allow_failures: 
     - python: pypy3
