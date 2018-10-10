@@ -2,8 +2,8 @@ language: python
 
 python:
   - 2.7 #.14
-  - 3.7 #.0 
-  - pypy3 #6.0.0
+ # - 3.7 #.0 
+ # - pypy3 #6.0.0
 
 #runtime:
 #  - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
@@ -26,9 +26,9 @@ runtime:
       ci:
         - echo "CI from runtimebuild section"
         
-      post_ci:
-        - echo "pre-ci section from runtimebuild"
-        - docker push shippabledocker/sample-node:runtimebuild
+      #post_ci:
+      #  - echo "pre-ci section from runtimebuild"
+      #  - docker push shippabledocker/sample-node:runtimebuild
         
       on_success:
         - echo "on success form runtimebuild"
@@ -36,12 +36,12 @@ runtime:
       on_failure:
         - echo "on failure form runtimebuild"
         
-      cache: true
+     # cache: true
     #  cache_dir_list:
     #    - #dir1
     
-      push:
-        - docker push shippabledocker/sample-node:master.50
+      #push:
+     #   - docker push shippabledocker/sample-node:master.50
         
       always:
         - docker push shippabledocker/sample-node:master.40
