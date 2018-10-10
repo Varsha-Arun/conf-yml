@@ -14,7 +14,7 @@ runtime:
   - nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
     build:
       pre_ci:
-        - echo "pre-ci section"
+        - echo "pre-ci section from runtimebuild"
         - docker build -t=shippabledocker/sample-node:runtimebuild .
         
       pre_ci_boot:
@@ -27,13 +27,14 @@ runtime:
         - echo "CI from runtimebuild section"
         
       post_ci:
+        - echo "pre-ci section from runtimebuild"
         - docker push shippabledocker/sample-node:runtimebuild
         
       on_success:
-        - echo "on success form runtime build"
+        - echo "on success form runtimebuild"
         
       on_failure:
-        - echo "on failure form runtime build"
+        - echo "on failure form runtimebuild"
         
       cache: true
     #  cache_dir_list:
