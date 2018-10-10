@@ -44,10 +44,10 @@ runtime:
      #   - docker push shippabledocker/sample-node:master.50
         
       always:
-        - docker push shippabledocker/sample-node:master.40
+        - echo "on always form runtimebuild"
 build:
   ci:
-    - echo "hi"
+    - echo "hi from build CI"
     
 integrations:
   hub:
