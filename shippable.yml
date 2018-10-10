@@ -124,7 +124,7 @@ build:
     - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
-  cache: true
+  #cache: true
   #cache_dir_list:
    # - #dir
    
