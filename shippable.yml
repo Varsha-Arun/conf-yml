@@ -167,7 +167,7 @@ build:
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
   pre_ci_boot:
-    image_name: drydock/u16pytall
+    image_name: drydock/u16all
     image_tag: master
     env: envInPreCiBoot=bar
     pull: $IMAGE_PULL
