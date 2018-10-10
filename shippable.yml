@@ -18,7 +18,7 @@ runtime:
         - docker build -t=shippabledocker/sample-node:runtimebuild .
         
       pre_ci_boot:
-        image_name: drydock/u16all
+        image_name: drydock/u16pytall
         image_tag: master
         pull: true
         options: '--privileged=true --net=bridge -e FOO=trueFromRuntimeBuild -e BOO=falseFromRuntimeBuild'
@@ -44,40 +44,6 @@ runtime:
         
       always:
         - docker push shippabledocker/sample-node:master.40
-env:
-  global:
-  #Testing for user defined envs and secure envs
-    - TEST1=EnvFoo
-    - env1=valueFromEnvGlobal
-    - secure: WW/f74KB+/rBPWMpL+hs9PYmO98Hd2PbeGkVMDDaOaDVOYkePjy4xM+NF/06EVsh6wwz1ToihClh1xltrcmfz/JNiSA2pciDksDElSPLzeq5qg4NYeNuLnmziR68AtTadrrZuPOKsT69GcoAvFYX1ZvtYQ4YGBOtbr9a+5lD1jFguv9HcUiDeB3uJLvYVqMsa1tccecvePNfbvVQNAPVB3TMEtU8cJtQyPkK1x448E5aYV9IpY1kc1PmDyDBzlVPxlAIDeND5rXzJafZpnTbPyVU9EnfaY1eXU3/FW6cVCvBzhIXdUF9IChGdG+aiXK3p+BnDlh3Og+6HUUZFZvF4A== 
-      #secure env key and value ----> TEST2=EnvSecure
-    - IMAGE_NAME=shippabledocker/sample_node_pvt
-    - IMAGE_TAG=latest.40
-    - IMAGE_PULL=true     
-  
-  matrix:
-    - M1=ONE
-
-addons: 
-  firefox: "25.0" 
-  
-matrix:
-#include this version with the env 
-  include:               
-    - python: pypy #this cant trigger 3 builds for multiple node pool. Include section purpose is trigger something in single build not as matrix. if we apply multiple node pool here it might end up in triggering in matrix so doesnt apply.
-      env: 
-        - M1=ONE #just to pass build Since this is in include section it wont take matrix environment variable and value so adding same env n value here. since in all section we are verifing env n value
-        - env1=OneValueFromInclude
-#excludes this version 
-  exclude:             
-    - python: 3.7
-      env:
-        - env1=valuefromexcludesection
-#allows failure for this version
-  allow_failures: 
-    - python: pypy3
-
-
         
 integrations:
   hub:
@@ -85,4 +51,3 @@ integrations:
  #Docker integration
     - integrationName: ship-docker
       type: dockerRegistryLogin
- 
