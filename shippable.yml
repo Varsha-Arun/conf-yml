@@ -2,8 +2,8 @@ language: python
 
 python:
   - 2.7 #.14
- # - 3.7 #.0 
- # - pypy3 #6.0.0
+  - 3.7 #.0 
+  - pypy3 #6.0.0
 
 #runtime:
 #  - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
@@ -18,7 +18,7 @@ runtime:
         - docker build -t=shippabledocker/sample-node:runtimebuild .
         
       pre_ci_boot:
-        image_name: drydock/u16all
+        image_name: drydock/u16pytall
         image_tag: master
         pull: true
         options: '--privileged=true --net=bridge -e FOO=trueFromRuntimeBuild -e BOO=falseFromRuntimeBuild'
