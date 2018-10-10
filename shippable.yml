@@ -140,21 +140,13 @@ runtime:
         
   - nodePool: default-restricted
     build:
-      pre_ci:
-        - echo "pre-ci from runtimeBuildsection"
-        - preCi=buildPreCi
-        - echo preCi=$preCi
-        - docker build -t=$IMAGE_NAME:$IMAGE_TAG .
-        - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-        - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
-        - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
       pre_ci_boot:
         image_name: drydock/aarch64_u16pytall
         image_tag: master
         env: envInPreCiBootBuild=bar
         pull: $IMAGE_PULL
-        options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
+       # options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
     
       ci:
         - python -V
