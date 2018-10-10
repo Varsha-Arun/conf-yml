@@ -151,14 +151,7 @@ runtime:
         - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi  
         - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
         - if [ "$SHIPPABLE_PYTHON_VERSION" == "pypy3" ]; then testfail; fi
-    
-      post_ci:
-        - echo "post-ci from runtimeBuild section"
-        - docker push $IMAGE_NAME:$IMAGE_TAG
-        - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-        - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
-        - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
-    
+       
       on_success:
         - echo "on-success from runtimeBuild section"
         - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
@@ -177,15 +170,10 @@ runtime:
         - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
         - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
         
-      cache: true
+      #cache: true
      # cache_dir_list:
      #   - $SHIPPABLE_BUILD_DIR/shippable.yml
    
-      push:
-        - echo "push from runtimeBuild section" 
-        - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-        - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
-        - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
 env:
   global:
   #Testing for user defined envs and secure envs
