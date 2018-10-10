@@ -59,12 +59,11 @@ runtime:
         - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
         - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
-  #cache: true
-  #cache_dir_list:
-   # - #dir
+      cache: true
+      cache_dir_list:
+        - $SHIPPABLE_BUILD_DIR/shippable.yml
    
       push:
-      
         - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
         - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
         - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
@@ -117,9 +116,9 @@ runtime:
         - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
         - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
-  #cache: true
-  #cache_dir_list:
-   # - #dir
+      cache: true
+      cache_dir_list:
+        - - $SHIPPABLE_BUILD_DIR/shippable.yml
    
       push:
         - echo "push from runtimeBuild section" 
@@ -202,8 +201,8 @@ build:
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
   cache: true
-  #cache_dir_list:
-   # - #dir
+  cache_dir_list:
+    - $SHIPPABLE_BUILD_DIR/shippable.yml
    
   push:
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
