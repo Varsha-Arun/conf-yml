@@ -39,8 +39,8 @@ runtime:
     #  cache_dir_list:
     #    - #dir1
     
-      push:
-        - docker push shippabledocker/sample-node:master.50
+     # push:
+     #   - docker push shippabledocker/sample-node:master.50
         
       always:
         - echo "on always form runtime build"
