@@ -43,7 +43,7 @@ runtime:
         - docker push shippabledocker/sample-node:master.50
         
       always:
-        - docker push shippabledocker/sample-node:master.40
+        - echo "on always form runtime build"
 env:
   global:
   #Testing for user defined envs and secure envs
