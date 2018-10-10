@@ -7,8 +7,6 @@ runtime:
   - nodePool: default-restricted
   
 build:
-  pre_ci:
-    - echo "hello from preci"
     
   ci: 
     - echo "Hello!"
