@@ -45,7 +45,10 @@ runtime:
         
       always:
         - docker push shippabledocker/sample-node:master.40
-        
+build:
+  ci:
+    - echo "hi"
+    
 integrations:
   hub:
 
