@@ -9,7 +9,41 @@ python:
 #  - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
 #  - nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
 #  - nodePool: dynamic__x86_64__CentOS_7__c4_large
-  
+
+runtime:
+  - nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
+    build:
+      pre_ci:
+        - echo "pre-ci section"
+        - docker build -t=shippabledocker/sample-node:runtimebuild .
+        
+      pre_ci_boot:
+        image_name: drydock/u16all
+        image_tag: master
+        pull: true
+        options: '--privileged=true --net=bridge -e FOO=trueFromRuntimeBuild -e BOO=falseFromRuntimeBuild'
+        
+      ci:
+        - echo "CI from runtimebuild section"
+        
+      post_ci:
+        - docker push shippabledocker/sample-node:runtimebuild
+        
+      on_success:
+        - echo "on success form runtime build"
+        
+      on_failure:
+        - echo "on failure form runtime build"
+        
+      cache: true
+    #  cache_dir_list:
+    #    - #dir1
+    
+      push:
+        - docker push shippabledocker/sample-node:master.50
+        
+      always:
+        - docker push shippabledocker/sample-node:master.40
 env:
   global:
   #Testing for user defined envs and secure envs
@@ -56,7 +90,7 @@ build:
   pre_ci_boot:
     image_name: drydock/u16pytall
     image_tag: master
-    env: envInPreCiBoot=bar
+    env: envInPreCiBootBuild=bar
     pull: $IMAGE_PULL
     options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
     
