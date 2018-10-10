@@ -45,9 +45,7 @@ runtime:
         
       always:
         - echo "on always form runtimebuild"
-build:
-  ci:
-    - echo "hi from build CI"
+
     
 integrations:
   hub:
