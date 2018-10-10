@@ -137,6 +137,70 @@ runtime:
         - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
         - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
         - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+        
+  - nodePool: default-restricted
+    build:
+      pre_ci:
+        - echo "pre-ci from runtimeBuildsection"
+        - preCi=buildPreCi
+        - echo preCi=$preCi
+        - docker build -t=$IMAGE_NAME:$IMAGE_TAG .
+        - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+        - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+        - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+    
+      pre_ci_boot:
+        image_name: drydock/aarch64_u16pytall
+        image_tag: master
+        env: envInPreCiBootBuild=bar
+        pull: $IMAGE_PULL
+        options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
+    
+      ci:
+        - python -V
+        - echo "ci from runtimeBuild section"
+        - echo "env1=$env1"
+        - echo "preCi=$preCi"
+       # - if [ $preCi == "buildPreCi" ]; then echo 'success'; else testfail; fi
+        - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+        - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi  
+        - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+        - if [ "$SHIPPABLE_PYTHON_VERSION" == "pypy3" ]; then testfail; fi
+    
+      post_ci:
+        - echo "post-ci from runtimeBuild section"
+        - docker push $IMAGE_NAME:$IMAGE_TAG
+        - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+        - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+        - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+    
+      on_success:
+        - echo "on-success from runtimeBuild section"
+        - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+        - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi \
+        - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+    
+      on_failure:
+        - echo "on-failure from runtimeBuild section"
+        - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+        - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+        - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+    
+      always:
+        - echo "always from runtimeBuild section"
+        - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+        - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+        - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+        
+      cache: true
+     # cache_dir_list:
+     #   - $SHIPPABLE_BUILD_DIR/shippable.yml
+   
+      push:
+        - echo "push from runtimeBuild section" 
+        - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+        - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+        - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
 env:
   global:
   #Testing for user defined envs and secure envs
@@ -221,6 +285,7 @@ build:
     - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
+
 integrations:
   hub:
 
