@@ -207,6 +207,10 @@ matrix:
   allow_failures: 
     - python: pypy3
       nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
+    - python: pypy3
+      nodePool: dynamic__x86_64__CentOS_7__c4_large
+    - python: pypy3
+      nodePool: default-restricted
 
 build:
  # pre_ci:
