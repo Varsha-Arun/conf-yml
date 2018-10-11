@@ -6,9 +6,11 @@ python:
  # - pypy3 #6.0.0
 
 runtime:
- # - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
+ # - nodePool: custom__x86_64__Ubuntu_16_04
+  - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
   - nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
-  #- nodePool: dynamic__x86_64__CentOS_7__c4_large
+  - nodePool: dynamic__x86_64__CentOS_7__c4_large
+ # - nodePool: default-restricted
   
 git:
   submodules: true
@@ -46,19 +48,19 @@ addons:
  #   - python: pypy3
 
 build:
-  pre_ci:
-    - echo "pre-ci section"
-    - docker build -t=$IMAGE_NAME:$IMAGE_TAG .
-    - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
-    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+  #pre_ci:
+  #  - echo "pre-ci section"
+  #  - docker build -t=$IMAGE_NAME:$IMAGE_TAG .
+  #  - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+  #  - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+  #  - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
-  pre_ci_boot:
-    image_name: drydock/u16pytall
-    image_tag: master
-    env: envInPreCiBoot=bar
-    pull: $IMAGE_PULL
-    options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
+ # pre_ci_boot:
+ #   image_name: drydock/u16pytall
+ #   image_tag: master
+ #   env: envInPreCiBoot=bar
+ #   pull: $IMAGE_PULL
+ #   options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
     
   ci:
     - python -V
@@ -68,12 +70,12 @@ build:
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     - if [ "$SHIPPABLE_PYTHON_VERSION" == "pypy3" ]; then testfail; fi
     
-  post_ci:
-    - echo "post-ci section"
-    - docker push $IMAGE_NAME:$IMAGE_TAG
-    - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
-    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+ # post_ci:
+ #   - echo "post-ci section"
+ #   - docker push $IMAGE_NAME:$IMAGE_TAG
+    #- if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+   # - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+   # - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
   on_success:
     - echo "on-success section"
@@ -91,10 +93,10 @@ build:
   cache_dir_list:
     - $SHIPPABLE_BUILD_DIR/shippable.yml
    
-  push:
-    - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
-    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+ # push:
+ #   - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+ #   - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+ #   - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
         
 integrations:
   hub:
