@@ -188,7 +188,7 @@ env:
   matrix:
     - M1=ONE
 
-#addons: 
+#addons: #commenting them since i cant override these section in restricted node pool
  # firefox: "25.0" #its not working for restricted nodePools
   
 matrix:
