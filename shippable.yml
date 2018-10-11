@@ -3,7 +3,7 @@ language: python
 
 # Version number
 python:
-  - "pypy3"
+  - 2.7
 
 runtime:
  # - nodePool: custom__x86_64__Ubuntu_16_04
