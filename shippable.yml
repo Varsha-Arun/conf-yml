@@ -8,4 +8,4 @@ language: none
 build:
   ci: 
     - echo "Hello!"
-    - sleep 180m
+    - sleep 12m
