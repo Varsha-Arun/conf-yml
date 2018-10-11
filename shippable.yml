@@ -292,4 +292,3 @@ integrations:
  #Docker integration
     - integrationName: ship-docker
       type: dockerRegistryLogin
- 
