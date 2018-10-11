@@ -213,14 +213,14 @@ matrix:
       nodePool: default-restricted
 
 build:
- # pre_ci:
+ # pre_ci: #commenting them since i cant override these section in restricted node pool
  #   - echo "pre-ci section"
   #  - docker build -t=$IMAGE_NAME:$IMAGE_TAG .
   #  - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
   #  - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
   #  - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
-#  pre_ci_boot:
+#  pre_ci_boot:  #commenting them since i cant override these section in restricted node pool
 #    image_name: drydock/u16all
 #    image_tag: master
 #    env: envInPreCiBoot=bar
@@ -235,12 +235,12 @@ build:
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     - if [ "$SHIPPABLE_PYTHON_VERSION" == "pypy3" ]; then testfail; fi
     
-  post_ci:
-    - echo "post-ci section"
-    - docker push $IMAGE_NAME:$IMAGE_TAG
-    - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
-    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+ # post_ci:  #commenting them since i cant override these section in restricted node pool
+ #   - echo "post-ci section"
+ #   - docker push $IMAGE_NAME:$IMAGE_TAG
+ #   - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+ #   - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+ #   - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
   on_success:
     - echo "on-success section"
@@ -255,13 +255,13 @@ build:
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
   cache: true
-  #cache_dir_list:
-   # - $SHIPPABLE_BUILD_DIR/shippable.yml
+  cache_dir_list:
+    - $SHIPPABLE_BUILD_DIR/shippable.yml
    
-  push:
-    - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
-    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+ # push:  #commenting them since i cant override these section in restricted node pool
+ #   - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+ #   - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+ #   - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
 
 integrations:
