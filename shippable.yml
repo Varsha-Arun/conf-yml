@@ -228,11 +228,11 @@ matrix:
 #allows failure for this version
   allow_failures: 
     - python: pypy3
-      nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
-    - python: pypy3
-      nodePool: dynamic__x86_64__CentOS_7__c4_large
-    - python: pypy3
-      nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
+    #  nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
+    #- python: pypy3
+    #  nodePool: dynamic__x86_64__CentOS_7__c4_large
+    #- python: pypy3
+    #  nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
 
 build:
   pre_ci: #commenting them since i cant override these section in restricted node pool
