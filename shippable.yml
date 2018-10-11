@@ -2,8 +2,8 @@ language: python
 
 python:
   - 2.7 #.14
-  - 3.7 #.0 
-  - pypy3 #6.0.0
+  #- 3.7 #.0 
+ # - pypy3 #6.0.0
 
 #runtime:
  # - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
@@ -29,21 +29,21 @@ env:
 addons: 
   firefox: "25.0" 
   
-matrix:
+#matrix:
 #include this version with the env 
-  include:               
-    - python: pypy
-      env: 
-        - M1=ONE #just to pass build Since this is in include section it wont take matrix environment variable and value so adding same env n value here. since in all section we are verifing env n value
-        - env1=OneValueFromInclude
+  #include:               
+  #  - python: pypy
+   #   env: 
+   #     - M1=ONE #just to pass build Since this is in include section it wont take matrix environment variable and value so adding same env n value here. since in all section we are verifing env n value
+    #    - env1=OneValueFromInclude
 #excludes this version 
-  exclude:             
-    - python: 3.7
-      env:
-        - env1=test37 
+#  exclude:             
+ #   - python: 3.7
+ #     env:
+ #       - env1=test37 
 #allows failure for this version
-  allow_failures:
-    - python: pypy3
+ # allow_failures:
+ #   - python: pypy3
 
 build:
   pre_ci:
