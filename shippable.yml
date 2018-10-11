@@ -206,6 +206,7 @@ matrix:
 #allows failure for this version
   allow_failures: 
     - python: pypy3
+      nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
 
 build:
  # pre_ci:
