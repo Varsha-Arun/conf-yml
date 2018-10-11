@@ -14,7 +14,7 @@ runtime:
   - nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
     build:
       pre_ci:
-        - echo "pre-ci section"
+        - echo "pre-ci from runtime build section"
         - docker build -t=shippabledocker/sample-node:runtimebuild .
         
       pre_ci_boot:
@@ -88,7 +88,7 @@ build:
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
   pre_ci_boot:
-    image_name: drydock/u16pytall
+    image_name: drydock/u16all
     image_tag: master
     env: envInPreCiBootBuild=bar
     pull: $IMAGE_PULL
