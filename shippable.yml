@@ -140,7 +140,22 @@ runtime:
         
   - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
     build:
+      pre_ci:
+        - echo "pre-ci from runtimeBuildsection"
+        - preCi=buildPreCi
+        - echo preCi=$preCi
+        - docker build -t=$IMAGE_NAME:$IMAGE_TAG .
+        - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+        - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+        - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
+      pre_ci_boot:
+        image_name: drydock/u16pytall
+        image_tag: master
+        env: envInPreCiBootBuild=bar
+        pull: $IMAGE_PULL
+        options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
+        
       ci:
         - python -V
         - echo "ci from runtimeBuild section"
@@ -151,7 +166,14 @@ runtime:
         - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi  
         - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
         - if [ "$SHIPPABLE_PYTHON_VERSION" == "pypy3" ]; then testfail; fi
-       
+      
+      post_ci:
+        - echo "post-ci from runtimeBuild section"
+        - docker push $IMAGE_NAME:$IMAGE_TAG
+        - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+        - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+        - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+        
       on_success:
         - echo "on-success from runtimeBuild section"
         - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
