@@ -66,8 +66,8 @@ runtime:
         - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
         
       cache: true
-      #cache_dir_list:
-      #  - $SHIPPABLE_BUILD_DIR/shippable.yml
+      cache_dir_list:
+        - $SHIPPABLE_BUILD_DIR/shippable.yml
    
       push:
         - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
@@ -129,8 +129,8 @@ runtime:
         - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
         
       cache: true
-     # cache_dir_list:
-     #   - $SHIPPABLE_BUILD_DIR/shippable.yml
+      cache_dir_list:
+        - $SHIPPABLE_BUILD_DIR/shippable.yml
    
       push:
         - echo "push from runtimeBuild section" 
@@ -138,7 +138,7 @@ runtime:
         - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
         - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
         
-  - nodePool: default-restricted
+  - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
     build:
     
       ci:
@@ -170,9 +170,9 @@ runtime:
         - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
         - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
         
-      #cache: true
-     # cache_dir_list:
-     #   - $SHIPPABLE_BUILD_DIR/shippable.yml
+      cache: true
+      cache_dir_list:
+        - $SHIPPABLE_BUILD_DIR/shippable.yml
    
 env:
   global:
@@ -188,8 +188,8 @@ env:
   matrix:
     - M1=ONE
 
-#addons: 
- # firefox: "25.0" #its not working for restricted nodePools
+addons: 
+  firefox: "25.0" #its not working for restricted nodePools
   
 matrix:
 #include this version with the env 
@@ -213,19 +213,19 @@ matrix:
       nodePool: default-restricted
 
 build:
- # pre_ci: #commenting them since i cant override these section in restricted node pool
- #   - echo "pre-ci section"
-  #  - docker build -t=$IMAGE_NAME:$IMAGE_TAG .
-  #  - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-  #  - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
-  #  - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+  pre_ci: #commenting them since i cant override these section in restricted node pool
+    - echo "pre-ci section"
+    - docker build -t=$IMAGE_NAME:$IMAGE_TAG .
+    - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
-#  pre_ci_boot:  #commenting them since i cant override these section in restricted node pool
-#    image_name: drydock/u16all
-#    image_tag: master
-#    env: envInPreCiBoot=bar
-#    pull: $IMAGE_PULL
-#    options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
+  pre_ci_boot:  #commenting them since i cant override these section in restricted node pool
+    image_name: drydock/u16all
+    image_tag: master
+    env: envInPreCiBoot=bar
+    pull: $IMAGE_PULL
+    options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
     
   ci:
     - python -V
@@ -235,12 +235,12 @@ build:
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     - if [ "$SHIPPABLE_PYTHON_VERSION" == "pypy3" ]; then testfail; fi
     
- # post_ci:  #commenting them since i cant override these section in restricted node pool
- #   - echo "post-ci section"
- #   - docker push $IMAGE_NAME:$IMAGE_TAG
- #   - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
- #   - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
- #   - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+  post_ci:  #commenting them since i cant override these section in restricted node pool
+    - echo "post-ci section"
+    - docker push $IMAGE_NAME:$IMAGE_TAG
+    - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
   on_success:
     - echo "on-success section"
@@ -258,10 +258,10 @@ build:
   cache_dir_list:
     - $SHIPPABLE_BUILD_DIR/shippable.yml
    
- # push:  #commenting them since i cant override these section in restricted node pool
- #   - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
- #   - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
- #   - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+  push:  #commenting them since i cant override these section in restricted node pool
+    - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
 
 integrations:
