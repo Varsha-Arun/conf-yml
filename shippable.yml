@@ -31,7 +31,7 @@ build:
     - docker build -t=$IMAGE_NAME:$IMAGE_TAG .
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
     - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
-    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+    - if [ $M1 == "ONE1" ]; then echo 'success'; else testfail; fi 
     
   pre_ci_boot:
     image_name: drydock/u16pytall
