@@ -1,9 +1,7 @@
-language: python
+language: node_js
 
-python:
-  - 2.7 #.14
-  - 3.7 #.0 
-  - pypy3 #6.0.0
+node_js:
+  - 6.11
 
 #runtime:
  # - nodePool: custom__x86_64__Ubuntu_16_04
@@ -26,26 +24,7 @@ env:
   
   matrix:
     - M1=ONE
-
-addons: 
-  firefox: "25.0" 
   
-matrix:
-#include this version with the env 
-  include:               
-    - python: pypy #this cant trigger 3 builds for multiple node pool. Include section purpose is trigger something in single build not as matrix. if we apply multiple node pool here it might end up in triggering in matrix so doesnt apply.
-      env: 
-        - M1=ONE #just to pass build Since this is in include section it wont take matrix environment variable and value so adding same env n value here. since in all section we are verifing env n value
-        - env1=OneValueFromInclude
-#excludes this version 
-  exclude:             
-    - python: 3.7
-      env:
-        - env1=test37 
-#allows failure for this version
-  allow_failures: 
-    - python: pypy3
-
 build:
   pre_ci:
     - echo "pre-ci section"
@@ -62,7 +41,7 @@ build:
     options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
     
   ci:
-    - python -V
+    - node --version
     - echo "ci section"
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
     - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi  
@@ -95,7 +74,7 @@ build:
     - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
-  cache: true
+  #cache: true
   #cache_dir_list:
    # - #dir
    
