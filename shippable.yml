@@ -20,7 +20,9 @@ env:
       #secure env key and value ----> TEST2=EnvSecure
     - IMAGE_NAME=shippabledocker/sample_node_pvt
     - IMAGE_TAG=latest.40
-    - IMAGE_PULL=true     
+    - IMAGE_PULL=true   
+    - APP_NAME=rc-testapp
+    - BRANCH=always-section
   
   matrix:
     - M1=ONE
@@ -82,6 +84,13 @@ build:
     
   on_failure:
     - echo "on-failure section"
+    - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
+    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+  
+  always:
+    - echo "always section"
+    - git push -f git@heroku.com:$APP_NAME.git master
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
     - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
