@@ -69,7 +69,7 @@ build:
   
   always:
     - echo "always section"
-    - git push -f git@heroku.com:$APP_NAME.git $BRANCH:master
+    - git push -f git@heroku.com:$APP_NAME.git master
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
     - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
