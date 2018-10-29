@@ -1,22 +1,22 @@
 language: none
 
-runtime:
-  - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
-  - nodePool: dynamic__x86_64__CentOS_7__c4_large
+#runtime:
+#  - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
+ # - nodePool: dynamic__x86_64__CentOS_7__c4_large
 
-env:
-  - ENV1=one
-  - ENV2=two
+#env:
+#  - ENV1=one
+#  - ENV2=two
   
 matrix: 
   include:
   #  - python: pypy3
     - nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
-      env: INCLUDE=matrixinclude
-     
+      env: INCLUDE=matrixinclude_U14
+    - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
+      env: INCLUDE=matrixinclude_U16
+      
 build:
   ci: 
     - echo "Hello!"
-    - echo ENV1=$ENV1
-    - echo ENV2=$ENV2
     - echo INCLUDE=$INCLUDE
