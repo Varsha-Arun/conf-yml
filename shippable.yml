@@ -26,8 +26,8 @@ env:
  # matrix:
   #  - M1=ONE
 
-addons: 
-  firefox: "25.0" 
+#addons: 
+#  firefox: "25.0" 
   
 matrix:
 #include this version with the env 
