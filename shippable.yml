@@ -4,9 +4,9 @@ language: none
 #  - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
  # - nodePool: dynamic__x86_64__CentOS_7__c4_large
 
-#env:
-#  - ENV1=one
-#  - ENV2=two
+env:
+  - INCLUDE=one
+  #- ENV2=two
   
 matrix: 
   include:
