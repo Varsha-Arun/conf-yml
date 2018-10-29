@@ -25,4 +25,4 @@ matrix:
     
 build:
   ci: 
-    - python -V
+    - python -V 
