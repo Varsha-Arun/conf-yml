@@ -22,7 +22,7 @@ matrix:
       nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
     #- python: pypy
    #   nodePool: dynamic__x86_64__CentOS_7__c4_large
-  allow_failure:
+  allow_failures:
     - python: pypy3
     
 build:
