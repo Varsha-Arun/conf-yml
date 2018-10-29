@@ -1,8 +1,8 @@
 language: python
 
 python:
-  - 2.7 #.14
-  #- 3.7 #.0 
+  - 3.7 #.0
+  #- 2.7 #.14
 
 #runtime:
 #  - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
@@ -29,15 +29,15 @@ addons:
 matrix:
 #include this version with the env 
   include:               
-    - python: 3.7 #this cant trigger 3 builds for multiple node pool. Include section purpose is trigger something in single build not as matrix. if we apply multiple node pool here it might end up in triggering in matrix so doesnt apply.
+    - python: 2.7 #this cant trigger 3 builds for multiple node pool. Include section purpose is trigger something in single build not as matrix. if we apply multiple node pool here it might end up in triggering in matrix so doesnt apply.
       env: 
         - M1=ONE #just to pass build Since this is in include section it wont take matrix environment variable and value so adding same env n value here. since in all section we are verifing env n value
         - env1=OneValueFromInclude       
-    - python: 3.7
+    - python: 2.7
       nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
-    - python: 3.7
+    - python: 2.7
       nodePool: dynamic__x86_64__CentOS_7__c4_large
-   # - python: 3.7
+   # - python: 2.7
    #   nodePool: default-restricted
 #excludes this version 
   exclude:             
@@ -58,12 +58,12 @@ build:
     - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
-  pre_ci_boot:
-    image_name: drydock/u16all
-    image_tag: master
-    env: envInPreCiBootBuild=bar
-    pull: $IMAGE_PULL
-    options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
+  #pre_ci_boot:
+ #   image_name: drydock/u16all
+  #  image_tag: master
+  #  env: envInPreCiBootBuild=bar
+  #  pull: $IMAGE_PULL
+   # options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
     
   ci:
     - python -V
