@@ -2,48 +2,13 @@ language: python
 
 python:
   - 2.7 #.14
-  - 3.7 #.0 
-  - pypy3 #6.0.0
+  #- 3.7 #.0 
 
-#runtime:
-#  - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
+runtime:
+  - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
 #  - nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
 #  - nodePool: dynamic__x86_64__CentOS_7__c4_large
 
-runtime:
-  - nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
-    build:
-      pre_ci:
-        - echo "pre-ci from runtime build section"
-        - docker build -t=shippabledocker/sample-node:runtimebuild .
-        
-      pre_ci_boot:
-        image_name: drydock/u16pytall
-        image_tag: master
-        pull: true 
-        options: '--privileged=true --net=bridge -e FOO=trueFromRuntimeBuild -e BOO=falseFromRuntimeBuild'
-        
-      ci:
-        - echo "CI from runtimebuild section"
-        
-      post_ci:
-        - docker push shippabledocker/sample-node:runtimebuild
-        
-      on_success:
-        - echo "on success form runtime build"
-        
-      on_failure:
-        - echo "on failure form runtime build"
-        
-    #  cache: true
-    #  cache_dir_list:
-    #    - #dir1
-    
-     # push:
-     #   - docker push shippabledocker/sample-node:master.50
-        
-      always:
-        - echo "on always form runtime build"
 env:
   global:
   #Testing for user defined envs and secure envs
@@ -64,18 +29,24 @@ addons:
 matrix:
 #include this version with the env 
   include:               
-    - python: pypy #this cant trigger 3 builds for multiple node pool. Include section purpose is trigger something in single build not as matrix. if we apply multiple node pool here it might end up in triggering in matrix so doesnt apply.
+    - python: 3.7 #this cant trigger 3 builds for multiple node pool. Include section purpose is trigger something in single build not as matrix. if we apply multiple node pool here it might end up in triggering in matrix so doesnt apply.
       env: 
         - M1=ONE #just to pass build Since this is in include section it wont take matrix environment variable and value so adding same env n value here. since in all section we are verifing env n value
-        - env1=OneValueFromInclude
+        - env1=OneValueFromInclude       
+    - python: 3.7
+      nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
+    - python: 3.7
+      nodePool: dynamic__x86_64__CentOS_7__c4_large
+   # - python: 3.7
+   #   nodePool: default-restricted
 #excludes this version 
   exclude:             
-    - python: 3.7
+    - python: pypy
       env:
         - env1=valuefromexcludesection
 #allows failure for this version
   allow_failures: 
-    - python: pypy3
+    - python: pypy3  
 
 build:
   pre_ci:
@@ -124,7 +95,7 @@ build:
     - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
-  #cache: true
+  cache: true
   #cache_dir_list:
    # - #dir
    
