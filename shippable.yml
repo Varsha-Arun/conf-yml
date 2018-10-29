@@ -12,11 +12,11 @@ python:
  # - nodePool: dynamic__x86_64__WindowsServer_2016__c4_2xlarge
 
 matrix: 
-  include:
-    - nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
-      env: INCLUDE=matrixinclude_U14
-    - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
-      env: INCLUDE=matrixinclude_U16
+#  include:
+#    - nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
+#      env: INCLUDE=matrixinclude_U14
+#    - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
+#      env: INCLUDE=matrixinclude_U16
   exclude:
     - python: pypy3
       nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
