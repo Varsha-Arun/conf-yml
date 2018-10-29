@@ -40,6 +40,8 @@ matrix:
       nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
     - python: 2.7
       nodePool: dynamic__x86_64__CentOS_7__c4_large
+    - python: 3.7
+      nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
    # - python: 2.7
    #   nodePool: default-restricted
 #excludes this version 
