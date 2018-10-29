@@ -3,6 +3,8 @@ language: python
 python:
   - 3.7 #.0
   #- 2.7 #.14
+  - pypy
+  - pypy3
 
 #runtime:
 #  - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
@@ -18,10 +20,11 @@ env:
       #secure env key and value ----> TEST2=EnvSecure
     - IMAGE_NAME=shippabledocker/sample_node_pvt
     - IMAGE_TAG=latest.40
-    - IMAGE_PULL=true     
-  
-  matrix:
+    - IMAGE_PULL=true  
     - M1=ONE
+  
+ # matrix:
+  #  - M1=ONE
 
 addons: 
   firefox: "25.0" 
