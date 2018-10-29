@@ -6,9 +6,9 @@ python:
   - pypy
   - pypy3
 
-#runtime:
- # - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
- # - nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
+runtime:
+  - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
+  - nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
  # - nodePool: dynamic__x86_64__WindowsServer_2016__c4_2xlarge
 
 matrix: 
@@ -20,9 +20,15 @@ matrix:
   exclude:
     - python: pypy3
       nodePool: dynamic__x86_64__Ubuntu_16_04__c4_xxxxvjhlarge
-   # - python: pypy
+    #- python: pypy
    #   nodePool: dynamic__x86_64__CentOS_7__c4_large
+  allow_failure:
+    - python: pypy3
+      nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
+    - python: pypy3
+      nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
     
 build:
   ci: 
     - python -V 
+    - if [ "$SHIPPABLE_PYTHON_VERSION" == "pypy3" ]; then testfail; fi
