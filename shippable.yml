@@ -46,7 +46,7 @@ build:
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
     - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi  
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
-    - sleep 12m
+    #- sleep 12m
     
   post_ci:
     - echo "post-ci section"
