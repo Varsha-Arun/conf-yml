@@ -90,7 +90,7 @@ integrations:
   hub:
   
    # #ECR integration
-    - integrationName: awskeys
+    - integrationName: aws-new
       type: amazonKeys
       region: us-east-1
     #  branches: #Testing the wildcards for branches exclude
