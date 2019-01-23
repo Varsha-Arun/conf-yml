@@ -11,4 +11,22 @@ build:
     
   ci: 
     - echo "Hello!"
- 
+
+resources:
+  - name: conf-ymlrepo
+    type: gitRepo
+    integration: github
+    pointer:
+      sourceName: Varsha-Arun/conf-yml
+      branch: pipelinesimplerunsh-pr1
+
+jobs:
+  - name: simplerunsh
+    type: runSh
+    steps:
+      - IN: conf-ymlrepo
+      - TASK:
+        - script: ls
+        - script: ./IN/conf-ymlrepo/gitRepo/script.sh
+    always:
+      - script: echo "This works on_always"
