@@ -18,10 +18,12 @@ resources:
     integration: github
     pointer:
       sourceName: Varsha-Arun/conf-yml
+      buildOnPullRequestClose: true
+      buildOnPullRequest: true
       branch: pipelinesimplerunsh-pr1
 
 jobs:
-  - name: simplerunsh
+  - name: pl-simplerunsh
     type: runSh
     steps:
       - IN: conf-ymlrepo
