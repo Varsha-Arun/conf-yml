@@ -10,4 +10,4 @@ language: none
 build:
   ci: 
     - echo "Hello!"
-    - sleep 12m
+    - sleep 12m 
