@@ -20,3 +20,4 @@ build:
   ci: 
     - echo "Hello!"
     - echo INCLUDE=$INCLUDE
+    - python -V
