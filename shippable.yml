@@ -27,30 +27,11 @@ env:
 
 addons: 
   firefox: "25.0" 
-  
-matrix:
-#include this version with the env 
-  include:               
-    - python: pypy
-      env: 
-        - M1=ONE #just to pass build Since this is in include section it wont take matrix environment variable and value so adding same env n value here. since in all section we are verifing env n value
-        - env1=OneValueFromInclude
-#excludes this version 
-  exclude:             
-    - python: 3.7
-      env:
-        - env1=test37 
-#allows failure for this version
-  allow_failures:
-    - python: pypy3
 
 build:
   pre_ci:
     - echo "pre-ci section"
     - docker build -t=$IMAGE_NAME:$IMAGE_TAG .
-    - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
-    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
   pre_ci_boot:
     image_name: drydock/u16pytall
@@ -62,10 +43,6 @@ build:
   ci:
     - python -V
     - echo "ci section"
-    - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi  
-    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
-    - if [ "$SHIPPABLE_PYTHON_VERSION" == "pypy3" ]; then testfail; fi
     - pip install -r requirements.txt
     - mkdir -p shippable/testresults
     - mkdir -p shippable/codecoverage
@@ -76,30 +53,10 @@ build:
   post_ci:
     - echo "post-ci section"
     - docker push $IMAGE_NAME:$IMAGE_TAG
-    - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
-    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
-    
-  on_success:
-    - echo "on-success section"
-    - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi \
-    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
-    
-  on_failure:
-    - echo "on-failure section"
-    - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
-    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
   cache: true
   cache_dir_list:
     - $SHIPPABLE_BUILD_DIR/shippable.yml
-   
-  push:
-    - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
-    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
         
 integrations:
   hub:
