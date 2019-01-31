@@ -2,8 +2,8 @@ language: python
 
 python:
   - 2.7 #.14
-  - 3.7 #.0 
-  - pypy3 #6.0.0
+ # - 3.7 #.0 
+  #- pypy3 #6.0.0
 
 runtime:
  # - nodePool: custom__x86_64__Ubuntu_16_04
@@ -15,9 +15,6 @@ runtime:
 env:
   global:
   #Testing for user defined envs and secure envs
-    - TEST1=EnvFoo
-    - secure: WW/f74KB+/rBPWMpL+hs9PYmO98Hd2PbeGkVMDDaOaDVOYkePjy4xM+NF/06EVsh6wwz1ToihClh1xltrcmfz/JNiSA2pciDksDElSPLzeq5qg4NYeNuLnmziR68AtTadrrZuPOKsT69GcoAvFYX1ZvtYQ4YGBOtbr9a+5lD1jFguv9HcUiDeB3uJLvYVqMsa1tccecvePNfbvVQNAPVB3TMEtU8cJtQyPkK1x448E5aYV9IpY1kc1PmDyDBzlVPxlAIDeND5rXzJafZpnTbPyVU9EnfaY1eXU3/FW6cVCvBzhIXdUF9IChGdG+aiXK3p+BnDlh3Og+6HUUZFZvF4A== 
-      #secure env key and value ----> TEST2=EnvSecure
     - IMAGE_NAME=shippabledocker/sample_node_pvt
     - IMAGE_TAG=latest.40
     - IMAGE_PULL=true     
