@@ -99,10 +99,6 @@ build:
  #   - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
  #   - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
 
-python:
-  - 2.7 #.14
-  - 3.7 #.0 
-  - pypy3 #6.0.0
   
 integrations:
   hub:
@@ -193,6 +189,11 @@ integrations:
         only:
           - p*
 
+python:
+  - 2.7 #.14
+  - 3.7 #.0 
+  - pypy3 #6.0.0
+  
 resources:
   - name: conf-ymlrepoprivatesubmodules
     type: gitRepo
