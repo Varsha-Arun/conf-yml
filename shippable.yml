@@ -44,6 +44,9 @@ python:
   - "3.7" #.0 
   - "pypy3" #6.0.0
 
+addons: 
+  firefox: "25.0"
+  
 build:
   pre_ci:
     - echo "pre-ci section"
