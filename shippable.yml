@@ -189,10 +189,6 @@ integrations:
         only:
           - p*
 
-python:
-  - 2.7 #.14
-  - 3.7 #.0 
-  - pypy3 #6.0.0
   
 resources:
   - name: conf-ymlrepoprivatesubmodules
@@ -204,6 +200,12 @@ resources:
       buildOnPullRequest: true
       branch: privatesubmodules
 
+
+python:
+  - 2.7 #.14
+  - 3.7 #.0 
+  - pypy3 #6.0.0
+  
 jobs:
   - name: pl-simplerunshprivatesubmodules
     type: runSh
