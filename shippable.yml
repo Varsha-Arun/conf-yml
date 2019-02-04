@@ -186,3 +186,24 @@ integrations:
       branches:
         only:
           - p*
+          
+resources:
+  - name: conf-ymlrepoprivatesubmodules
+    type: gitRepo
+    integration: github
+    pointer:
+      sourceName: Varsha-Arun/conf-yml
+      buildOnPullRequestClose: true
+      buildOnPullRequest: true
+      branch: privatesubmodules
+
+jobs:
+  - name: pl-simplerunshprivatesubmodules
+    type: runSh
+    steps:
+      - IN: conf-ymlrepoprivatesubmodules
+      - TASK:
+        - script: ls
+        - script: ./IN/conf-ymlrepoprivatesubmodules/gitRepo/script.sh
+    always:
+      - script: echo "This works on_always"
