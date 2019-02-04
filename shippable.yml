@@ -62,12 +62,7 @@ jobs:
         - script: ./IN/conf-ymlrepoprivatesubmodules/gitRepo/script.sh
     always:
       - script: echo "This works on_always"
-      
-python:
-  - "2.7" #.14
-  - "3.7" #.0 
-  - "pypy3" #6.0.0
-  
+
 build:
   pre_ci:
     - echo "pre-ci section"
@@ -118,6 +113,11 @@ build:
  #   - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
  #   - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
  #   - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+ 
+python:
+  - "2.7" #.14
+  - "3.7" #.0 
+  - "pypy3" #6.0.0
         
 integrations:
   hub:
