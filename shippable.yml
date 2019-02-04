@@ -38,14 +38,14 @@ matrix:
 #############allows failure for this version
   allow_failures:
     - python: pypy3
-    
+
+addons: 
+  firefox: "25.0"
+  
 python:
   - "2.7" #.14
   - "3.7" #.0 
   - "pypy3" #6.0.0
-
-addons: 
-  firefox: "25.0"
   
 build:
   pre_ci:
