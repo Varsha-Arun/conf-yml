@@ -22,12 +22,7 @@ env:
   
   matrix:
     - M1=ONE
-    
-python:
-  - "2.7" #.14
-  - "3.7" #.0 
-  - "pypy3" #6.0.0
-  
+
 matrix:
  ########include this version with the env 
   include:               
@@ -43,6 +38,11 @@ matrix:
 #############allows failure for this version
   allow_failures:
     - python: pypy3
+    
+python:
+  - "2.7" #.14
+  - "3.7" #.0 
+  - "pypy3" #6.0.0
 
 build:
   pre_ci:
