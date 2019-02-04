@@ -201,10 +201,7 @@ resources:
       branch: privatesubmodules
 
 
-python:
-  - 2.7 #.14
-  - 3.7 #.0 
-  - pypy3 #6.0.0
+
   
 jobs:
   - name: pl-simplerunshprivatesubmodules
@@ -216,4 +213,8 @@ jobs:
         - script: ./IN/conf-ymlrepoprivatesubmodules/gitRepo/script.sh
     always:
       - script: echo "This works on_always"
-      
+ 
+python:
+  - 2.7 #.14
+  - 3.7 #.0 
+  - pypy3 #6.0.0 
