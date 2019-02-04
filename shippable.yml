@@ -7,20 +7,20 @@ runtime:
  # - nodePool: custom__x86_64__Ubuntu_16_04
   - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
   - nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
- # - nodePool: dynamic__x86_64__CentOS_7__c4_large
-  - nodePool: default-restricted
+  - nodePool: dynamic__x86_64__CentOS_7__c4_large
+  #- nodePool: default-restricted
   
 python:
   - "2.7" #.14
   - "3.7" #.0 
- # - pypy3 #6.0.0
+  - "pypy3" #6.0.0
 
 env:
   global:
   #Testing for user defined envs and secure envs
-    - TEST1=EnvFoo
     - secure: WW/f74KB+/rBPWMpL+hs9PYmO98Hd2PbeGkVMDDaOaDVOYkePjy4xM+NF/06EVsh6wwz1ToihClh1xltrcmfz/JNiSA2pciDksDElSPLzeq5qg4NYeNuLnmziR68AtTadrrZuPOKsT69GcoAvFYX1ZvtYQ4YGBOtbr9a+5lD1jFguv9HcUiDeB3uJLvYVqMsa1tccecvePNfbvVQNAPVB3TMEtU8cJtQyPkK1x448E5aYV9IpY1kc1PmDyDBzlVPxlAIDeND5rXzJafZpnTbPyVU9EnfaY1eXU3/FW6cVCvBzhIXdUF9IChGdG+aiXK3p+BnDlh3Og+6HUUZFZvF4A== 
       #secure env key and value ----> TEST2=EnvSecure
+    - TEST1=EnvFoo    
     - IMAGE_NAME=shippabledocker/sample_node_pvt
     - IMAGE_TAG=latest.40
     - IMAGE_PULL=true     
@@ -28,36 +28,36 @@ env:
   matrix:
     - M1=ONE
   
-#matrix:
-#include this version with the env 
-  #include:               
-  #  - python: pypy
-   #   env: 
-   #     - M1=ONE #just to pass build Since this is in include section it wont take matrix environment variable and value so adding same env n value here. since in all section we are verifing env n value
-    #    - env1=OneValueFromInclude
-#excludes this version 
-#  exclude:             
- #   - python: 3.7
- #     env:
- #       - env1=test37 
-#allows failure for this version
- # allow_failures:
- #   - python: pypy3
+matrix:
+ ########include this version with the env 
+  include:               
+    - python: pypy
+      env: 
+        - M1=ONE #just to pass build Since this is in include section it wont take matrix environment variable and value so adding same env n value here. since in all section we are verifing env n value
+        - env1=OneValueFromInclude
+##########excludes this version 
+  exclude:             
+    - python: 3.7
+      env:
+        - env1=test37 
+#############allows failure for this version
+  allow_failures:
+    - python: pypy3
 
 build:
-  #pre_ci:
-  #  - echo "pre-ci section"
-  #  - docker build -t=$IMAGE_NAME:$IMAGE_TAG .
+  pre_ci:
+    - echo "pre-ci section"
+    - docker build -t=$IMAGE_NAME:$IMAGE_TAG .
   #  - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
   #  - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
   #  - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
- # pre_ci_boot:
- #   image_name: drydock/u16pytall
- #   image_tag: master
- #   env: envInPreCiBoot=bar
- #   pull: $IMAGE_PULL
- #   options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
+  pre_ci_boot:
+    image_name: drydock/u16pytall
+    image_tag: master
+    env: envInPreCiBoot=bar
+    pull: $IMAGE_PULL
+    options: '--privileged=true --net=bridge -e FOO=true -e BOO=false'
     
   ci:
     - python -V
@@ -67,9 +67,9 @@ build:
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     - if [ "$SHIPPABLE_PYTHON_VERSION" == "pypy3" ]; then testfail; fi
     
- # post_ci:
- #   - echo "post-ci section"
- #   - docker push $IMAGE_NAME:$IMAGE_TAG
+  post_ci:
+    - echo "post-ci section"
+    - docker push $IMAGE_NAME:$IMAGE_TAG
     #- if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
    # - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
    # - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
