@@ -9,11 +9,6 @@ runtime:
   - nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
   - nodePool: dynamic__x86_64__CentOS_7__c4_large
   #- nodePool: default-restricted
-  
-python:
-  - "2.7" #.14
-  - "3.7" #.0 
-  - "pypy3" #6.0.0
 
 env:
   global:
@@ -27,6 +22,11 @@ env:
   
   matrix:
     - M1=ONE
+    
+python:
+  - "2.7" #.14
+  - "3.7" #.0 
+  - "pypy3" #6.0.0
   
 matrix:
  ########include this version with the env 
