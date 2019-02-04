@@ -102,6 +102,21 @@ build:
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
         
 integrations:
+  notifications:
+
+    - integrationName: email         
+      type: email        
+      recipients:
+        - shiptest.rc.ow@gmail.com
+        - shiptest.rc.me@gmail.com
+        - varsha@shippable.com
+      sendConsoleLogs: true
+      sendCoverageReports: true
+      on_start: always
+      on_success: always 
+      on_failure: always 
+      on_cancel: always
+      
   hub:
 
  #Docker integration
