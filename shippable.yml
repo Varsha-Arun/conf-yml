@@ -4,11 +4,11 @@ git:
   submodules: true
 
 runtime:
- # - nodePool: custom__x86_64__Ubuntu_16_04
+  - nodePool: custom__x86_64__Ubuntu_16_04
   - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
   - nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
   - nodePool: dynamic__x86_64__CentOS_7__c4_large
-  #- nodePool: default-restricted
+  - nodePool: default-restricted
 
 env:
   global:
@@ -49,7 +49,7 @@ build:
     - echo "pre-ci section"
     - docker build -t=$IMAGE_NAME:$IMAGE_TAG .
   #  - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
-  #  - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
+    - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
   #  - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
   pre_ci_boot:
