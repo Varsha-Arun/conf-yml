@@ -2,7 +2,7 @@ language: python
 
 python:
   2.7 #.14
-  3.7 #.0 
+  #3.7 #.0 
  # - pypy3 #6.0.0
 
 #runtime:
@@ -12,8 +12,8 @@ python:
  # - nodePool: dynamic__x86_64__CentOS_7__c4_large
  # - nodePool: default-restricted
   
-#git:
-#  submodules: true
+git:
+  submodules: true
 
 env:
   global:
