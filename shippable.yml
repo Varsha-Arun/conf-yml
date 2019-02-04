@@ -1,12 +1,13 @@
 python:
-  - "2.7" #.14
-  - "3.7" #.0 
-  - "pypy3" #6.0.0
+  - 2.7 #.14
+  - 3.7 #.0 
+  - pypy3 #6.0.0
 
 language: python
 
 git:
   submodules: true
+  
 runtime:
   - nodePool: custom__x86_64__Ubuntu_16_04
   - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
