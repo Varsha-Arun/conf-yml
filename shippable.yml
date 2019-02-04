@@ -6,8 +6,8 @@ git:
 runtime:
   - nodePool: custom__x86_64__Ubuntu_16_04
   - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
-  - nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
-  - nodePool: dynamic__x86_64__CentOS_7__c4_large
+  #- nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
+  #- nodePool: dynamic__x86_64__CentOS_7__c4_large
   #- nodePool: default-restricted
 
 env:
@@ -44,10 +44,7 @@ matrix:
 addons: 
   firefox: "25.0"
 
-python:
-  - 2.7 #.14
-  - 3.7 #.0 
-  - pypy3 #6.0.0
+
   
 
 
@@ -102,6 +99,11 @@ build:
  #   - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
  #   - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
 
+python:
+  - 2.7 #.14
+  - 3.7 #.0 
+  - pypy3 #6.0.0
+  
 integrations:
   hub:
 
