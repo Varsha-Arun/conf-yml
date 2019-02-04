@@ -1,5 +1,8 @@
 language: python
 
+git:
+  submodules: true
+  
 python:
   - "2.7" #.14
   - "3.7" #.0 
@@ -11,9 +14,6 @@ python:
  # - nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
  # - nodePool: dynamic__x86_64__CentOS_7__c4_large
  # - nodePool: default-restricted
-  
-git:
-  submodules: true
 
 env:
   global:
