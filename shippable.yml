@@ -45,7 +45,7 @@ matrix:
 build:
   pre_ci:
     - echo "pre-ci section"
-    - docker build -t=$IMAGE_NAME:$IMAGE_TAG .
+    #- docker build -t=$IMAGE_NAME:$IMAGE_TAG .
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
     - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
@@ -73,7 +73,7 @@ build:
     
   post_ci:
     - echo "post-ci section"
-    - docker push $IMAGE_NAME:$IMAGE_TAG
+   # - docker push $IMAGE_NAME:$IMAGE_TAG
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
     - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
