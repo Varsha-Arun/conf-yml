@@ -1,11 +1,9 @@
 language: python
 
 runtime:
- # - nodePool: custom__x86_64__Ubuntu_16_04
- # - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
- # - nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
- # - nodePool: dynamic__x86_64__CentOS_7__c4_large
- # - nodePool: default-restricted
+  - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
+  - nodePool: default_node_pool
+  - nodePool: u16_shared_nodepool
   
 python:
   - 2.7 #.14
