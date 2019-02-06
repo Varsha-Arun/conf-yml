@@ -16,7 +16,7 @@ env:
   global:
   #Testing for user defined envs and secure envs
     - TEST1=EnvFoo
-    - secure: ijvH0WO2ijUTBgamdzSviO+jxnFY+p8/jJSvgnQR15yEcSTaAq4NwAOcmYHaduZJWX4Rhq6TbexOFuem+ys0vlP8fFuy7dWjlQkEIN/EJN5WimjJ7dTM/k73Yn344LUStz7cQBjrIVbGSnoBTbf0d+tgJy8CKQDkvHiACdV9qcIKP2bFJIrP9aVC7OQik0VhydfKOHCRkZe0eAPDvMePq6bupBZzYgxMNdoUUNRsI3AvU6a33/d25fPk5poBVdSEqy8YZCFCodVIv6fpS5h1cR46+GLmr8Vm4/PMm0p/1QfsvL9KQxK02sqfMMqycxgawDJN7zDKpY+8q5MmgJ1aPQ==
+    - secure: U29DjsJzs0LMEVHffTVeb1oYrDHEDyHaJXllysJSOQqwg9f8AtXCkBRGQ0MDPJQlq38yp6exhhs8hUyU32MS0qMp5oLx+DNnOnq7Q9fBVroV245SZBPab68/iiqbfmt0KuCnzgDQb3Tl2IgRpw0icg2mlz9UgCKHI8SyxRf2PnRXaCQQVdrye/fj0sAqSkTK7qVEIBNOam3MfciCSmtS3geOhF7YHXdC64CxqwRK1H918M7Ot4DwpTWqeeo7mUcRRyeGoY2clwVudQT3yRC3HR1c6J4ZOaDyC7SkGjAzC4f7fX5nHzhj5BCR0x3RDvGUdX4fAumFub0NUEDeVjhAjg==
       #secure env key and value ----> TEST2=EnvSecure
     - IMAGE_NAME=shippabledocker/sample_node_pvt
     - IMAGE_TAG=latest.40
