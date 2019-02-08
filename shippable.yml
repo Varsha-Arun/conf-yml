@@ -5,11 +5,11 @@ python:
   - 3.7 #.0 
   - pypy3 #6.0.0
 
-#runtime:
+runtime:
  # - nodePool: custom__x86_64__Ubuntu_16_04
- # - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
+  - nodePool: dynamic__x86_64__Ubuntu_16_04__c4_large
  # - nodePool: dynamic__x86_64__Ubuntu_14_04__c4_xlarge
- # - nodePool: dynamic__x86_64__CentOS_7__c4_large
+  - nodePool: dynamic__x86_64__CentOS_7__c4_large
  # - nodePool: default-restricted
   
 env:
@@ -21,9 +21,17 @@ env:
     - IMAGE_NAME=shippabledocker/sample_node_pvt
     - IMAGE_TAG=latest.40
     - IMAGE_PULL=true     
+    - secure: Wb9ws1mnEF8/Bc3ZHTjwFl2n/29rCX5APZzCGozzY5flF7KfoyxOAJyzRWqQmL9g7+oMvJ8gTJmwr+1CZsNubxkmoqr4NQwUWl1mRV2RJsiqbIRrw7ua/JN5RBaF4wDlgdtd20E9DhflRjkFujNlZ9CaKmL5naw4emkqXtcyzu0GJQRUGcyjIpVrmqk5Mm59kUIebkrRdIe0l+a5aSo+LVFeGiJIEJZm/gCqIiNJJtOEO6CRSjo0QPNHBIWTPBz/sVYjgnOLQy1plYtC6MaozXiNlSWEloxJkQCaLRGSj8H7HnKtESmg6xSTY1iZLgim3kbcaVequhV2SKhK7IjUhw==
+    ## env4=four
+    - secure: RLfv1A0VinGazFytFmGAuEpltm4JluFLonrMD7suC/YzOUcA2ZX/apBWjDq45UwlcM/QWqdSglzW+KgPo0WV1IaoRx4O9Vqs4EdRjigse+pYg9pZHPt80VCQIWKEgDfcMCwCLtQevI1y3IYza0+OW0l8uKb5Qe71ButLzbhh30O08kSMinB63e2kva89VrnNTW5Vs0o4b1Pu9fMchmz6bAO2Z/jAXclDGpHVoizKhq4Y3FPjLuxjEF1KRIwQE8rk8QEnTPAYNEW4T9HHZCvGPNHQo6JaYzHI2kNlUpGma+MGa8j7M0qEWUUfhGIIClaykTS+8MLIaLOkIDQ6GJEJUw==
+    ## env5=five
   
   matrix:
     - M1=ONE
+    - secure: udOvjFIFXqTQB8RSsZdS6p1Gl+EHGI8uyIs9FO5a9HZrc/4uxNNgxQUJH3t+3xUwlK9N2QNxwKDM/ZmGdqowtUqcFQgtl8omplFmdHDZOcuYp9k6pxN+Wtix+bMyNPR/ZzWpgZVJdOsRldERScgG1HvfWhHW0k4QyLjCil9v8A24bhoVIYFsfiUlpg4jMNLtqm0GLaiz09X9fzM/Cvt3aL/cySItddKGGybLPz8UfnUU3OWUhAnriyVoTXC3tRwfuzRaLTDguJ4NR+i92DQHZdiiNIwis9w4qWVK4Q0MsJ2GVQ0EcGjXG0aCWAfWtINWSvb794MOdXLa/cNsR4TD0Q==
+    ########### TEST4=pvtenvSecureMatrix
+    - secure: ABNdddLikTVFTHQ2g9y//zIg+qQHBsRmMdgTJ3Su8i4Z8wnmxtL7Izhm19CC0TwdhSIkkPCFrRk0MTdh9HlOGNRcH2ZD7uZlpqvP+Ql8Sb0JaQbSYTQls0W2Fx7sku7+kuPdJhQxf5FoCrTNtCPcUXwo4U8ilGr50FmAoUjWQYnd6wgnclGBIZp1T7aK+RAdFN+uWErmBti/CFsNryB1CqQQrTW8+kxeXJMewOadmGvqRlgQBiipaW68lD9UTuLI2fu2tPJy64GOldWtHB6lFUiaMoS858FVSQh3RndbgwMHwK1gw6eS25cWIl02xZ6Mm+ufSXcujwdnA7p7hBS89Q==
+    ## env6=six
 
 addons: 
   firefox: "25.0" 
@@ -34,12 +42,16 @@ matrix:
     - python: pypy #this cant trigger 3 builds for multiple node pool. Include section purpose is trigger something in single build not as matrix. if we apply multiple node pool here it might end up in triggering in matrix so doesnt apply.
       env: 
         - M1=ONE #just to pass build Since this is in include section it wont take matrix environment variable and value so adding same env n value here. since in all section we are verifing env n value
-        - env1=OneValueFromInclude
+        - secure: JeDa167mhpq7wucSxzEE7DI1uOvYO3TAUoMeEF7SX4Asds6HO8b43JpEVLj7y+bgpScTF9QkGgf0rzzqhpHWAnlj5lLeJ/ISkVpfDEbGs6U+91GNamnU3HfTsVpFnYTuphGnFyDOjGbpwBGrZDkSYpTJbYT8e4sD3xueFBGWv72ppV/YHKUyEUQh458LkWBJuGrUT+LBUzNOEitaHUXxu3LemZ45fHMQbJcaZCKVyxST4Zz4pyIG9/SBnUvAftutKokUXY8+Yoj0rvyLBp4YldK/e6aK2iNm/HRZlJr24YrlVKz5fpayPw6UKw4eRpanD+ze1xKRKNZ6S64La/ggxA==
+          ############## env2=twoValueFromInclude
+        - secure: Rm75M9jfiLraltsriiMdL7qc0+bk8HkxxEzPamSSgexgnXDTKBikyex/bZokRosspucn6+q7rOeeoiWOeCuE8HSrRQP6BaTbCwI4q1HR0AXe3IPBuDFk9dHV8ynNn/m8dRRvkjj2YHIPdyM1f6iDB5MkOFbicv5/H2RzKi7SMKmjhF1vN1CyAtYtXMYmicWAOfBC0rlwQAs3jn9Ayl6gX97chgLhcQmOQWSq03/tHbBSCGU4Fol/W9eCzSSsnXafOeuihiFlfSB2yAyaYGuQxRnFb+ly8H111LrDF29QnMUVOcs0T7iehkwqN20rrAvIU1oJtrz4SUWL8uY5+HbDdA==
+          ############## env3=threeValueFromInclude
 #excludes this version 
   exclude:             
     - python: 3.7
       env:
-        - env1=test37 
+        - secure: WW/f74KB+/rBPWMpL+hs9PYmO98Hd2PbeGkVMDDaOaDVOYkePjy4xM+NF/06EVsh6wwz1ToihClh1xltrcmfz/JNiSA2pciDksDElSPLzeq5qg4NYeNuLnmziR68AtTadrrZuPOKsT69GcoAvFYX1ZvtYQ4YGBOtbr9a+5lD1jFguv9HcUiDeB3uJLvYVqMsa1tccecvePNfbvVQNAPVB3TMEtU8cJtQyPkK1x448E5aYV9IpY1kc1PmDyDBzlVPxlAIDeND5rXzJafZpnTbPyVU9EnfaY1eXU3/FW6cVCvBzhIXdUF9IChGdG+aiXK3p+BnDlh3Og+6HUUZFZvF4A== 
+            #####################    secure env key and value ----> TEST2=EnvSecure 
 #allows failure for this version
   allow_failures: 
     - python: pypy3
@@ -66,7 +78,10 @@ build:
     - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi  
     - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     - if [ "$SHIPPABLE_PYTHON_VERSION" == "pypy3" ]; then testfail; fi
-    
+    - echo "TEST4=$TEST4"
+    - echo "env2=$env2"
+    - echo "env3=$env3"
+  
   post_ci:
     - echo "post-ci section"
     - docker push $IMAGE_NAME:$IMAGE_TAG
