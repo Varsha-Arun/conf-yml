@@ -62,7 +62,7 @@ build:
     - docker build -t=$IMAGE_NAME:$IMAGE_TAG .
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
     - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
-    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+  #  - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
   pre_ci_boot:
     image_name: drydock/u16pytall
@@ -76,7 +76,7 @@ build:
     - echo "ci section"
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
     - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi  
-    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+#    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     - if [ "$SHIPPABLE_PYTHON_VERSION" == "pypy3" ]; then testfail; fi
     - echo "TEST4=$TEST4"
     - echo "env2=$env2"
@@ -90,19 +90,19 @@ build:
     - docker push $IMAGE_NAME:$IMAGE_TAG
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
     - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
-    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+  #  - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
   on_success:
     - echo "on-success section"
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
     - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi \
-    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+  #  - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
   on_failure:
     - echo "on-failure section"
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
     - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
-    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+  #  - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
     
   cache: true
   #cache_dir_list:
@@ -111,7 +111,7 @@ build:
   push:
     - if [ $TEST1 == "EnvFoo" ]; then echo 'success'; else testfail; fi
     - if [ $TEST2 == "EnvSecure" ]; then echo 'success'; else testfail; fi 
-    - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
+   # - if [ $M1 == "ONE" ]; then echo 'success'; else testfail; fi 
         
 integrations:
   hub:
