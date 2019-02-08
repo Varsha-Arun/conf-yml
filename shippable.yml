@@ -81,6 +81,9 @@ build:
     - echo "TEST4=$TEST4"
     - echo "env2=$env2"
     - echo "env3=$env3"
+    - echo "env4=$env4"
+    - echo "env5=$env5"
+    - echo "env6=$env6"
   
   post_ci:
     - echo "post-ci section"
