@@ -118,4 +118,4 @@ integrations:
 
  #Docker integration
     - integrationName: ship-docker
-      type: docker #RegistryLogin
+      type: dockerRegistryLogin
