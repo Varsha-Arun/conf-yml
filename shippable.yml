@@ -112,7 +112,7 @@ integrations:
       region: us-east-1 
 
 #jfrog new imtegration for CI
-    - integrationName: test_jfrog_generic
+    - integrationName:  jfrognew #test_jfrog_generic
       type: artifactory
       
  # deploy: 
