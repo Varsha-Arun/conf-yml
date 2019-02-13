@@ -1,4 +1,3 @@
-
 # Language setting
 language: python
 
@@ -35,5 +34,5 @@ build:
     
 integrations:
   hub:
-    - integrationName: test_jfrog_generic
+    - integrationName: jfrognew #test_jfrog_generic
       type: artifactory
