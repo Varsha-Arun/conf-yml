@@ -34,5 +34,5 @@ build:
     
 integrations:
   hub:
-    - integrationName: jfrognew #test_jfrog_generic
+    - integrationName: jfrogci #test_jfrog_generic
       type: artifactory
