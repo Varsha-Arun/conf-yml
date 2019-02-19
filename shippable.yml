@@ -98,7 +98,7 @@ integrations:
       #  except:
        ##   - n*
     - integrationName: awskeys
-      type: ecr
+      type: amazonKeys #ecr
       region: us-east-1
   #Quay.io integration    
     #- integrationName: ship-quay
