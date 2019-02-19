@@ -113,7 +113,7 @@ integrations:
 
 #jfrog new imtegration for CI
     - integrationName:  jfrognew #test_jfrog_generic
-      type: artifactory
+      type: artifactoryKey
       
  # deploy: 
   #elastic beanstalk with new awskeys integrations using "deploy" tag in integrations
