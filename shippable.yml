@@ -97,9 +97,9 @@ integrations:
     #  branches: #Testing the wildcards for branches exclude
       #  except:
        ##   - n*
-   # - integrationName: ship-ecreast1
-   #   type: ecr
-   #   region: us-east-1
+    - integrationName: awskeys
+      type: ecr
+      region: us-east-1
   #Quay.io integration    
     #- integrationName: ship-quay
      # type: quay.io
@@ -107,9 +107,9 @@ integrations:
       type: quayLogin
 
   #ecr with new integration using "hub" tag in integrations
-    - integrationName: awskeys
-      type: amazonKeys
-      region: us-east-1 
+   # - integrationName: awskeys
+   #   type: amazonKeys
+   #   region: us-east-1 
 
 #jfrog new imtegration for CI
     - integrationName: jfrognew #test_jfrog_generic
