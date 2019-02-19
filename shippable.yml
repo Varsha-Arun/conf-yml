@@ -68,7 +68,7 @@ build:
     #- docker build -t=gcr.io/endless-ripple-224509/nodeimg:latest . 
     #- docker push gcr.io/endless-ripple-224509/nodeimg:latest
     - docker build -t=gcr.io/nodeprojectname/nodeimg:latest .
-    - docker push gcr.io/nodeprojectname/nodeimg:latest
+   # - docker push gcr.io/nodeprojectname/nodeimg:latest
     
   # Testing quay build and push
     - docker build -t=quay.io/revathird/samplenode_test .
@@ -93,11 +93,13 @@ integrations:
  #Docker integration
     - integrationName: docker
       type: dockerRegistryLogin
+      
   #GCR integration
     #- integrationName: ship-gcr
     #  type: gcr
     - integrationName: gcl
       type: gcloudKey
+      
  # #ECR integration
    # - integrationName: ship-ecr
     #  type: ecr
@@ -108,6 +110,7 @@ integrations:
    # - integrationName: awskeys
     #  type: amazonKeys #ecr
      # region: us-east-1
+     
   #Quay.io integration    
     #- integrationName: ship-quay
      # type: quay.io
